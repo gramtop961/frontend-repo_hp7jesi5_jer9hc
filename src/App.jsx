@@ -12,12 +12,30 @@ function App() {
   useEffect(() => {
     const onHashChange = () => setRoute(getRoute());
     window.addEventListener('hashchange', onHashChange);
-    // Ensure a default route
     if (!window.location.hash) {
       window.location.hash = '#/';
     }
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
+
+  // Smooth scroll to in-page sections when route points to them (e.g., #/testimonials)
+  useEffect(() => {
+    if (!route.startsWith('/dashboard')) {
+      const anchor = route.slice(1); // '' | 'testimonials' | 'case-studies' | ...
+      if (anchor) {
+        // Allow DOM to paint first
+        requestAnimationFrame(() => {
+          const el = document.getElementById(anchor);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      } else {
+        // Scroll to top on home
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  }, [route]);
 
   const content = useMemo(() => {
     if (route.startsWith('/dashboard')) {

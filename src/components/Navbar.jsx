@@ -26,11 +26,14 @@ export default function Navbar({ currentRoute = '/' }) {
           </a>
 
           <div className="hidden md:flex items-center gap-1">
-            <NavItem href="#/" active={!isDashboard}>Home</NavItem>
+            {/* Home should never be black-highlighted */}
+            <NavItem href="#/" active={false}>Home</NavItem>
+            {/* Dashboard gets the premium black pill when active */}
             <NavItem href="#/dashboard" active={isDashboard}>Dashboard</NavItem>
-            <NavItem href="#/case-studies">Case Studies</NavItem>
-            <NavItem href="#/testimonials">Testimonials</NavItem>
-            <NavItem href="#/faq">FAQ</NavItem>
+            {/* Section links: route to hash segments; App will smooth-scroll to ids */}
+            <NavItem href="#/case-studies" active={false}>Case Studies</NavItem>
+            <NavItem href="#/testimonials" active={false}>Testimonials</NavItem>
+            <NavItem href="#/faq" active={false}>FAQ</NavItem>
           </div>
 
           <a
