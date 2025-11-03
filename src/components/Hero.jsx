@@ -6,7 +6,7 @@ export default function Hero() {
     <section id="home" className="relative min-h-[92vh] pt-28 md:pt-32 bg-white">
       {/* Interactive 3D background */}
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/41MGRk-UDPKO-l6W/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <Spline scene="https://prod.spline.design/8nsoLg1te84JZcE9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
       {/* Content */}
