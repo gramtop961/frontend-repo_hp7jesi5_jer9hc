@@ -1,52 +1,36 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import BackgroundFX from './components/BackgroundFX';
 import Hero from './components/Hero';
-import BookingSection from './components/BookingSection';
-import DashboardPreview from './components/DashboardPreview';
+import ServicesProcess from './components/ServicesProcess';
+import Insights from './components/Insights';
 
-function Divider() {
+function App() {
   return (
-    <div className="pointer-events-none relative h-px w-full">
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-    </div>
-  );
-}
-
-export default function App() {
-  return (
-    <div className="min-h-screen bg-[#0b1220] text-white">
-      <BackgroundFX />
+    <div className="bg-white text-black min-h-screen">
       <Navbar />
       <main>
         <Hero />
-        <div className="mx-auto max-w-7xl px-4"><Divider /></div>
-        <BookingSection />
-        <div className="mx-auto max-w-7xl px-4"><Divider /></div>
-        <DashboardPreview />
-      </main>
-
-      <footer id="contact" className="relative py-16">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <div className="text-lg font-semibold">Ready to build something extraordinary?</div>
-              <p className="text-white/70">Let’s craft an elegant, enterprise-grade experience together.</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://cal.com/velodent-ogbkfv/20min"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold px-6 py-3 shadow-lg shadow-cyan-500/25 hover:scale-[1.02] active:scale-[0.99] transition-transform"
-              >
-                Book Now
-              </a>
+        <ServicesProcess />
+        <Insights />
+        <section id="dashboard" className="py-20 bg-white">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="rounded-2xl border border-black/10 p-8 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
+              <h2 className="text-2xl md:text-3xl font-extrabold">Dashboard portal</h2>
+              <p className="mt-2 text-black/70 max-w-2xl">A unified view of inquiries, bookings, and outcomes. Track conversion, response times, utilization, and campaign performance in real-time.</p>
+              <div className="mt-6 grid gap-4 md:grid-cols-3">
+                {['Inquiries → Bookings','Response time','Revenue impact'].map((k,i)=> (
+                  <div key={i} className="rounded-xl border border-black/10 p-5">
+                    <div className="text-sm uppercase tracking-wider text-black/50">Metric</div>
+                    <div className="mt-2 text-2xl font-extrabold">{k}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <p className="mt-6 text-center text-xs text-white/60">© {new Date().getFullYear()} VeloDent. All rights reserved.</p>
-        </div>
-      </footer>
+        </section>
+      </main>
     </div>
   );
 }
+
+export default App;
