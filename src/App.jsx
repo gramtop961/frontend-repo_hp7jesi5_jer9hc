@@ -1,62 +1,43 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import BackgroundFX from './components/BackgroundFX';
-import DashboardSignIn from './components/DashboardSignIn';
-import Showcase from './components/Showcase';
+import CaseStudies from './components/CaseStudies';
+import Testimonials from './components/Testimonials';
+import Footer from './components/Footer';
 
-function App() {
-  const getRoute = () => (typeof window !== 'undefined' ? window.location.hash.replace('#', '') || '/' : '/');
-  const [route, setRoute] = useState(getRoute());
+function handleHashScroll() {
+  const hash = window.location.hash; // e.g. #/case-studies
+  const path = hash.startsWith('#/') ? hash.slice(2) : hash.replace('#', '');
+  const id = path || '';
+  if (!id || id === '/') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
+export default function App() {
   useEffect(() => {
-    const onHashChange = () => setRoute(getRoute());
-    window.addEventListener('hashchange', onHashChange);
-    if (!window.location.hash) {
-      window.location.hash = '#/';
-    }
-    return () => window.removeEventListener('hashchange', onHashChange);
+    // Ensure clean transitions without flash/spot artifacts
+    const onChange = () => handleHashScroll();
+    window.addEventListener('hashchange', onChange);
+    // Initial navigation sync
+    handleHashScroll();
+    return () => window.removeEventListener('hashchange', onChange);
   }, []);
 
-  // Smooth scroll to in-page sections when route points to them (e.g., #/testimonials)
-  useEffect(() => {
-    if (!route.startsWith('/dashboard')) {
-      const anchor = route.slice(1); // '' | 'testimonials' | 'case-studies' | ...
-      if (anchor) {
-        // Allow DOM to paint first
-        requestAnimationFrame(() => {
-          const el = document.getElementById(anchor);
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      } else {
-        // Scroll to top on home
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-  }, [route]);
-
-  const content = useMemo(() => {
-    if (route.startsWith('/dashboard')) {
-      return <DashboardSignIn />;
-    }
-    // Home
-    return (
-      <>
-        <Hero />
-        <Showcase />
-      </>
-    );
-  }, [route]);
-
   return (
-    <div className="bg-white text-black min-h-screen relative">
-      <BackgroundFX />
-      <Navbar currentRoute={route} />
-      <main className="pt-0">{content}</main>
+    <div className="min-h-screen bg-white text-black">
+      <Navbar />
+      <main>
+        <Hero />
+        <CaseStudies />
+        <Testimonials />
+      </main>
+      <Footer />
     </div>
   );
 }
-
-export default App;
