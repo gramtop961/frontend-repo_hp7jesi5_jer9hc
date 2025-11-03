@@ -1,30 +1,36 @@
 import React from 'react';
 
-const NavItem = ({ href, children }) => (
+const NavItem = ({ href, active, children }) => (
   <a
     href={href}
-    className="relative text-sm md:text-base text-black/70 hover:text-black transition-colors px-3 py-2 group"
+    className={[
+      'relative text-sm md:text-base transition-colors px-3 py-2 group rounded-full',
+      active ? 'text-white bg-black border border-black shadow-[0_8px_24px_rgba(0,0,0,0.15)]' : 'text-black/70 hover:text-black'
+    ].join(' ')}
   >
     <span>{children}</span>
-    <span className="pointer-events-none absolute inset-x-2 -bottom-1 h-px bg-gradient-to-r from-transparent via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+    {!active && (
+      <span className="pointer-events-none absolute inset-x-2 -bottom-1 h-px bg-gradient-to-r from-transparent via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+    )}
   </a>
 );
 
-export default function Navbar() {
+export default function Navbar({ currentRoute = '/' }) {
+  const isDashboard = currentRoute.startsWith('/dashboard');
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-4">
-        <nav className="mt-4 flex items-center justify-between rounded-2xl border border-black/10 bg-white/60 backdrop-blur-xl px-4 md:px-6 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-          <a href="#home" className="flex items-center gap-2">
+        <nav className="mt-4 flex items-center justify-between rounded-2xl border border-black/10 bg-white/70 backdrop-blur-xl px-4 md:px-6 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+          <a href="#/" className="flex items-center gap-2">
             <span className="font-semibold text-black tracking-wide">Velodent</span>
           </a>
 
           <div className="hidden md:flex items-center gap-1">
-            <NavItem href="#home">Home</NavItem>
-            <NavItem href="#services">Services</NavItem>
-            <NavItem href="#dashboard">Dashboard</NavItem>
-            <NavItem href="#case-studies">Case Studies</NavItem>
-            <NavItem href="#testimonials">Testimonials</NavItem>
+            <NavItem href="#/" active={!isDashboard}>Home</NavItem>
+            <NavItem href="#/dashboard" active={isDashboard}>Dashboard</NavItem>
+            <NavItem href="#/case-studies">Case Studies</NavItem>
+            <NavItem href="#/testimonials">Testimonials</NavItem>
+            <NavItem href="#/faq">FAQ</NavItem>
           </div>
 
           <a

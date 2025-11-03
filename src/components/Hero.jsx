@@ -1,15 +1,8 @@
 import React from 'react';
-import Spline from '@splinetool/react-spline';
 
 export default function Hero() {
   return (
     <section id="home" className="relative min-h-[92vh] pt-28 md:pt-32 bg-white">
-      {/* Interactive 3D background */}
-      <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/8nsoLg1te84JZcE9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-      </div>
-
-      {/* Content */}
       <div className="relative z-10 mx-auto max-w-6xl px-4">
         <div className="mx-auto w-full md:w-5/6 lg:w-4/6 text-center">
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-black">AI that runs your front desk</h1>
@@ -25,6 +18,19 @@ export default function Hero() {
             >
               Book Call Now
             </a>
+          </div>
+
+          {/* Video hero */}
+          <div className="mt-10 rounded-2xl overflow-hidden border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.08)] bg-white">
+            <div className="aspect-video w-full">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&loop=1&playlist=dQw4w9WgXcQ"
+                title="Velodent AI Overview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
           </div>
 
           {/* Minimal stats strip */}
@@ -43,7 +49,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* subtle neutral overlays that never block interaction */}
+      {/* subtle neutral overlays */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-black/5 blur-3xl" />
         <div className="absolute -bottom-24 -right-8 h-80 w-80 rounded-full bg-black/5 blur-3xl" />
