@@ -16,13 +16,11 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4">
         <nav className="mt-4 flex items-center justify-between rounded-2xl border border-black/10 bg-white/60 backdrop-blur-xl px-4 md:px-6 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
           <a href="#home" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl border border-black/20 bg-white" />
             <span className="font-semibold text-black tracking-wide">Velodent</span>
           </a>
 
           <div className="hidden md:flex items-center gap-1">
             <NavItem href="#home">Home</NavItem>
-            <NavItem href="#about">About</NavItem>
             <NavItem href="#services">Services</NavItem>
             <NavItem href="#dashboard">Dashboard</NavItem>
             <NavItem href="#case-studies">Case Studies</NavItem>
@@ -35,7 +33,7 @@ export default function Navbar() {
             rel="noreferrer"
             className="inline-flex items-center rounded-full border border-black bg-black text-white text-sm font-semibold px-4 py-2 hover:opacity-90 transition shadow-[0_8px_24px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)]"
           >
-            Book Now
+            Book Call Now
           </a>
         </nav>
       </div>
